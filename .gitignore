@@ -1,6 +1,9 @@
 # gitignore reference:
 # https://github.com/github/gitignore/blob/main/Python.gitignore
 
+# secrets
+config_secret*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
