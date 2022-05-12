@@ -20,7 +20,7 @@ def lambda_handler(event, context):
     """
 
     # build_logger
-    build_logger(context)
+    build_logger(log_level=logging.INFO, request_id=context.aws_request_id)
 
     # get bucket, obj from event
     t_classification = f"{dt.utcnow().isoformat()}Z"

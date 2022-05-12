@@ -27,7 +27,7 @@ def lambda_handler(event, context):
     """
 
     # build_logger
-    build_logger(context)
+    build_logger(log_level=logging.INFO, request_id=context.aws_request_id)
 
     # AlertCamsImgService
     alert_service = AlertCamsImgService()
@@ -61,7 +61,7 @@ def lambda_handler(event, context):
         # validate alert:
 
         # labels_alert_found ?
-        labels_alert_lower = [l.lower() for l in LABELS_ALERT]
+        labels_alert_lower = [label_alert.lower() for label_alert in LABELS_ALERT]
         labels_alert_found = [label for label in class_dict['labels'] if label.lower() in labels_alert_lower]
 
         # no: no alert, ok
@@ -141,13 +141,13 @@ def build_ses_msg(class_dict, labels_alert_found):
 
     # replace template strings with the corresponding data
     labels_alert_found_str = ",".join(labels_alert_found)
-    eventTime_str = class_dict['eventTime'].replace('T', ' ').replace('Z', ' ')
+    event_time_str = class_dict['eventTime'].replace('T', ' ').replace('Z', ' ')
     body_text = BODY_TEXT_TEMPLATE\
         .replace('__labels_alert_found__', labels_alert_found_str)\
-        .replace('__eventTime__', eventTime_str)
+        .replace('__eventTime__', event_time_str)
     body_html = BODY_HTML_TEMPLATE\
         .replace('__labels_alert_found__', labels_alert_found_str)\
-        .replace('__eventTime__',eventTime_str)
+        .replace('__eventTime__', event_time_str)
 
     # Encode the text and HTML content and set the character encoding. This step is
     # necessary if you're sending a message with characters outside the ASCII range.
