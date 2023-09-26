@@ -2,8 +2,11 @@
 
 ## Introduction
 
-This project describes an affordable and reliable system for almost real-time human intrusion detection and automatic
-cloud storage of the video
+This project describes an affordable and reliable system for almost real-time human intrusion detection and automatic cloud storage of video, using a Synology NAS and AWS.
+
+The image below shows an example of the email we will receive as result of the human intrusion detection pipeline:
+
+<img src="img/aws-ipcam-alert-email.jpg">
 
 ## Requirements
 
